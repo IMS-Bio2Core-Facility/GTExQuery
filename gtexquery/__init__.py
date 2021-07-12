@@ -1,1 +1,2 @@
-__version__ = '0.1.0'
+"""Source code for the GTExQuery Package."""
+__version__ = "0.1.0"
