@@ -1,0 +1,5 @@
+Bioservices
+bioservices
+snakemake
+conda
+nox
