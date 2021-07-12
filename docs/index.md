@@ -19,6 +19,7 @@ For information about the source code,
 please see the [documentation](./source.md).
 If testing is your passion,
 take a peek at [testing](./testing.md).
+Recent changes can be observed at the [changelog](./changelog.md).
 Finally,
 if you are interested in contributing,
 please see our guide for [contributors](./contributing.md)
@@ -33,5 +34,6 @@ coc
 readme
 source
 testing
+changelog
 contributing
 ```
