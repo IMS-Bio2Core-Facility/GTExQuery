@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.2 (2021-07-12)
+### Fix
+* **multithreading:** Correct relative imports ([`3285559`](https://github.com/IMS-Bio2Core-Facility/GTExQuery/commit/328555968deb74c6ef44280a5ce125c17f1765d0))
+
 ## v0.2.1 (2021-07-12)
 ### Fix
 * **BMSession:** Change cache to False ([`1ce9c51`](https://github.com/IMS-Bio2Core-Facility/GTExQuery/commit/1ce9c5115fa6fc81573de79c6cd84512c94f86d2))
