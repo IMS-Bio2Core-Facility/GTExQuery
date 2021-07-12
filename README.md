@@ -7,7 +7,7 @@
 [![codecov](https://codecov.io/gh/IMS-Bio2Core-Facility/GTExQuery/branch/main/graph/badge.svg?token=L56T1KFL1J)](https://codecov.io/gh/IMS-Bio2Core-Facility/GTExQuery)
 [![Documentation Status](https://readthedocs.org/projects/gtexquery/badge/?version=latest)](https://gtexquery.readthedocs.io/en/latest/)
 [![Codestyle: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Stargazers](htpps://img.shields.io/github/stars/IMS-Bio2Core-Facility/gtexquery)](https://github.com/IMS-Bio2Core-Facility/GTExQuery/stargazers)
+[![PyPI](https://img.shields.io/pypi/v/gtexquery)](https://pypi.org/project/gtexquery/)
 
 ```{admonition} For use with GTExSnake
 :class: tip
