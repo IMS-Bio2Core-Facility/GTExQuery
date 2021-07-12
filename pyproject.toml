@@ -49,6 +49,7 @@ xdoctest = "^0.15.5"
 Sphinx = "^4.0.3"
 sphinx-rtd-theme = "^0.5.2"
 myst-parser = "^0.15.1"
+types-requests = "^2.25.0"
 
 [tool.semantic_release]
 branch = "main"

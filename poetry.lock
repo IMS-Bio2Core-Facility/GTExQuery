@@ -1350,6 +1350,14 @@ doc = ["sphinx-rtd-theme", "sphinx-autodoc-typehints (>=1.2.0)"]
 test = ["pytest", "typing-extensions", "mypy"]
 
 [[package]]
+name = "types-requests"
+version = "2.25.0"
+description = "Typing stubs for requests"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "typing-extensions"
 version = "3.10.0.0"
 description = "Backported and Experimental Type Hints for Python 3.5+"
@@ -1481,7 +1489,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "9d917075e8d30d7c5d8759e321bd2225d68e756f684d8f2f311bb944893922f0"
+content-hash = "52d2277ee024b35b5ac6bb956274c923ab6abdf0e6a5e6fa991b21eef75d756f"
 
 [metadata.files]
 aiohttp = [
@@ -2372,6 +2380,10 @@ tomlkit = [
 typeguard = [
     {file = "typeguard-2.12.1-py3-none-any.whl", hash = "sha256:cc15ef2704c9909ef9c80e19c62fb8468c01f75aad12f651922acf4dbe822e02"},
     {file = "typeguard-2.12.1.tar.gz", hash = "sha256:c2af8b9bdd7657f4bd27b45336e7930171aead796711bc4cfc99b4731bb9d051"},
+]
+types-requests = [
+    {file = "types-requests-2.25.0.tar.gz", hash = "sha256:ee0d0c507210141b7d5b8639cc43eaa726084178775db2a5fb06fbf85c185808"},
+    {file = "types_requests-2.25.0-py3-none-any.whl", hash = "sha256:fa5c1e5e832ff6193507d8da7e1159281383908ee193a2f4b37bc08140b51844"},
 ]
 typing-extensions = [
     {file = "typing_extensions-3.10.0.0-py2-none-any.whl", hash = "sha256:0ac0f89795dd19de6b97debb0c6af1c70987fd80a2d62d1958f7e56fcc31b497"},
