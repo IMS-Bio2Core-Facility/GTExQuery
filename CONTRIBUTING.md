@@ -121,7 +121,7 @@ but for you terminal warriors out there,
 it just might help!
 
 [conduct]: CODE_OF_CONDUCT.md "Code of conduct"
-[issues]: HOLDING "Issues"
+[issues]: https://github.com/IMS-Bio2Core-Facility/GTExQuery/issues "Issues"
 [gh]: https://github.com/cli/cli "GH CLI"
 [poetry]: https://python-poetry.org/ "Poetry"
 [poetry_install]: https://python-poetry.org/docs/#installation "Poetry Installation Instructions"
