@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.abspath("../gtexquery/"))
 project = "GTExQuery"
 author = "Ryan B Patterson-Cross"
 copyright = "2021, IMS-MRL Bioinformatics and Biostatistic Core"
-version = "0.2.0"
+version = "0.2.1"
 extensions = [
     "sphinx_rtd_theme",
     "sphinx.ext.autodoc",
