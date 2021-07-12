@@ -12,9 +12,11 @@ LOCATIONS: List[str] = [
     "noxfile.py",
     "tests",
 ]
-VERSIONS: List[str] = ["3.9",]
+VERSIONS: List[str] = [
+    "3.9",
+]
 
-nox.options.stop_on_first_error = True
+nox.options.stop_on_first_error = False
 nox.options.reuse_existing_virtualenvs = True
 
 
@@ -49,6 +51,7 @@ def lint(session: Session) -> None:
     constrained_install(
         session,
         "flake8",
+        "pyproject-flake8",
         "flake8-annotations",
         "flake8-bandit",
         "flake8-bugbear",
@@ -58,7 +61,7 @@ def lint(session: Session) -> None:
         "flake8-spellcheck",
         "darglint",
     )
-    session.run("flake8", *args)
+    session.run("pflake8", *args)
 
 
 @nox.session(python=VERSIONS)
@@ -107,11 +110,18 @@ def tests(session: Session) -> None:
 
 @nox.session(python=VERSIONS)
 def doc_tests(session: Session) -> None:
-    """Test docstrings with xdoctest."""
+    """Test docstrings with xdoctest.
+
+    As xdoctest does not seem to detect if multiple sources are passed,
+    session run must be called over each cource manually.
+
+    Parameters
+    ----------
+    session : Session
+        nox session
+    """
     args = session.posargs or ["all"]
-    session.run("poetry", "install", "--no-dev", external=True)
-    constrained_install(session, "xdoctest")
-    session.run(
+    command = [
         "python",
         "-m",
         "xdoctest",
@@ -120,9 +130,11 @@ def doc_tests(session: Session) -> None:
         "--report",
         "cdiff",
         "--nocolor",
-        PACKAGE,
-        *args,
-    )
+    ]
+    session.run("poetry", "install", "--no-dev", external=True)
+    constrained_install(session, "xdoctest")
+    for x in LOCATIONS:
+        session.run(*command, x, *args)
 
 
 @nox.session(python="3.9")
