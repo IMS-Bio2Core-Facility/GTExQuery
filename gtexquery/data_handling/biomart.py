@@ -42,7 +42,7 @@ class BMSession:
         """
         # session still worth it - re-used by each thread
         if not hasattr(thread_local, "bm"):
-            thread_local.bm = BioMart(host="www.ensembl.org", verbose=False, cache=True)
+            thread_local.bm = BioMart(host="www.ensembl.org", verbose=False, cache=False)
             logger.info(f"Generated BioMart with host {thread_local.bm.host}")
         return thread_local.bm
 
