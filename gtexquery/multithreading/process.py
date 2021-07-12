@@ -30,7 +30,7 @@ from dataclasses import dataclass
 from typing import Union
 
 import pandas as pd
-from data_handling.process import merge_data, write_data
+from ..data_handling.process import merge_data, write_data
 
 logger = logging.getLogger(__name__)
 
