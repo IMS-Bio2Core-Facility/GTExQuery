@@ -27,7 +27,7 @@ napoleon_use_param = False
 html_theme = "sphinx_rtd_theme"
 
 source_suffix = {
-    '.rst': 'restructuredtext',
-    '.md': 'markdown',
+    ".rst": "restructuredtext",
+    ".md": "markdown",
 }
 myst_heading_anchors = 2
