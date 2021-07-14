@@ -14,6 +14,7 @@ MANE : pd.DataFrame
     A minimal MANE dataset
 """
 from io import StringIO
+from pathlib import Path
 
 import pandas as pd
 
@@ -29,17 +30,19 @@ from ..custom_tmp_file import (
 MANE: pd.DataFrame = pd.read_csv(StringIO(MANE_CONTENTS))
 
 
-def test_returns_dataframe() -> None:
-    """It returns a DataFrame."""
-    results = merge_data(
+def test_writes_file(tmp_path: Path) -> None:
+    """It writes a file."""
+    out_path = tmp_path / "out.csv"
+    merge_data(
         CustomTempFile(GTEX_CONTENTS).filename,
         CustomTempFile(BIOMART_CONTENTS).filename,
         MANE,
+        out_path,
     )
-    assert type(results) == pd.DataFrame
+    assert out_path.stat().st_size > 0
 
 
-def test_results_columns() -> None:
+def test_results_columns(tmp_path: Path) -> None:
     """Its columns are named correctly ."""
     columns = [
         "gencodeId",
@@ -61,18 +64,21 @@ def test_results_columns() -> None:
         "chr_end",
         "chr_strand",
     ]
-    results = merge_data(
+    out_path = tmp_path / "out.csv"
+    merge_data(
         CustomTempFile(GTEX_CONTENTS).filename,
         CustomTempFile(BIOMART_CONTENTS).filename,
         MANE,
+        out_path,
     )
+    results = pd.read_csv(out_path, index_col=None)
     assert all(x in columns for x in results.columns), "Found an unexpected column."
     assert len(results.columns) == len(
         columns
     ), f"There should be {len(columns)} columns"
 
 
-def test_sorted_results() -> None:
+def test_sorted_results(tmp_path: Path) -> None:
     """The results are sorted by median.
 
     As the ``merge_data`` function technically sorts on "MANE_status" as well,
@@ -82,10 +88,18 @@ def test_sorted_results() -> None:
     Additionally, we cannot check the sort as most values are NaN,
     and knowing the correct order would require prior knowledge about the number
     of GTEx transcripts and the number with MANE status.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        pytest fixture for temporary path
     """
-    results = merge_data(
+    out_path = tmp_path / "out.csv"
+    merge_data(
         CustomTempFile(GTEX_CONTENTS).filename,
         CustomTempFile(BIOMART_CONTENTS).filename,
         MANE,
+        out_path,
     )
+    results = pd.read_csv(out_path, index_col=None)
     assert results["median"].is_monotonic

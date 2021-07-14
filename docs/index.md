@@ -24,7 +24,7 @@ Finally,
 if you are interested in contributing,
 please see our guide for [contributors](./contributing.md)
 
-[gtexsnake]: HOLDING "GTExSnake Snakemake Pipeline"
+[gtexsnake]: https://github.com/IMS-Bio2Core-Facility/GTExSnake "GTExSnake Snakemake Pipeline"
 
 ```{toctree}
 :hidden:

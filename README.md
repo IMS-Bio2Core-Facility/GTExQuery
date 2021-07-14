@@ -52,6 +52,6 @@ For more information about the source code,
 see our [documentation][docs] on ReadTheDocs.
 You can learn more about the pipeline this code supports [here][GTExSnake].
 
-[GTExSnake]: HOLDING "GTExSnake Snakemake Pipeline"
+[GTExSnake]: https://github.com/IMS-Bio2Core-Facility/GTExSnake "GTExSnake Snakemake Pipeline"
 [stars]: https://github.com/IMS-Bio2Core-Facility/GTExQuery/stargazers "Stargazers"
 [docs]: https://gtexquery.readthedocs.io/en/latest/ "Package Documentation"

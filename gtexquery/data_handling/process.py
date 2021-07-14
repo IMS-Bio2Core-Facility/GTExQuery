@@ -1,45 +1,39 @@
 # -*- coding: utf-8 -*-
-"""Data handling for *process* step.
+"""Data handling for *process* step."""
 
-Attributes
-----------
-Pathlike : TypeVar
-    A custom type to unify string and Path
-"""
 import logging
 from pathlib import Path
-from typing import TypeVar
+from typing import Union
 
 import pandas as pd
 
 logger = logging.getLogger(__name__)
 
 
-Pathlike = TypeVar("Pathlike", Path, str)
-
-
 def merge_data(
-    gtex_path: Pathlike, bm_path: Pathlike, mane: pd.DataFrame
-) -> pd.DataFrame:
+    gtex_path: Union[Path, str],
+    bm_path: Union[Path, str],
+    mane: pd.DataFrame,
+    out_path: Union[Path, str],
+) -> None:
     """Merge the data from previous pipeline queries.
 
     Parameters
     ----------
-    gtex_path : Pathlike
+    gtex_path : Union[Path, str]
         Path to the file containing GTEx query data.
-    bm_path : Pathlike
+    bm_path : Union[Path, str]
         Path to the file containing BioMart query data.
     mane : pd.DataFrame
-        A DataFrame containing MANE annotations
-
-    Returns
-    -------
-    pd.DataFrame
-        The merged DataFrame, containing the GTEx query,
-        the BioMart query, and the MANE annotations.
-
+        A DataFrame containing MANE annotations.
+    out_path : Union[Path, str]
+        Path to the output file.
     """
     gtex = pd.read_csv(gtex_path, header=0, index_col=None)
+
+    gene = gtex["geneSymbol"].unique()[0]
+    logger.info(f"Processing data for gene {gene}")
+
     bm = pd.read_csv(bm_path, header=0, index_col=None)
     data = (
         gtex.merge(bm, on=["geneSymbol", "gencodeId", "transcriptId"], how="outer")
@@ -50,27 +44,5 @@ def merge_data(
         )
         .sort_values(["median", "MANE_status"])
     )
-    return data
-
-
-def write_data(data: pd.DataFrame, writer: pd.ExcelWriter) -> None:
-    """Write a DataFrame to an Excel file.
-
-    Note
-    ----
-    This function is best used within a ``with`` block, so that:
-
-    #. The ``ExcelWriter`` is already open.
-    #. It will be properly closed.
-
-    Parameters
-    ----------
-    data : pd.DataFrame
-        The DataFrame to be written.
-    writer : pd.ExcelWriter
-        An **open** pandas ExcelWriter.
-
-    """
-    gene = data["geneSymbol"].unique()[0]
-    data.to_excel(writer, index=False, sheet_name=gene)
-    logger.info(f"{gene} add to output file.")
+    data.to_csv(out_path, index=False)
+    logger.info(f"Gene {gene} processed!")
