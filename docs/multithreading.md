@@ -17,11 +17,4 @@ multithreading.biomart
 .. automodule:: gtexquery.multithreading.biomart
    :members:
    :private-members:
-
-multithreading.process
-----------------------
-
-.. automodule:: gtexquery.multithreading.process
-   :members:
-   :private-members:
 ```
