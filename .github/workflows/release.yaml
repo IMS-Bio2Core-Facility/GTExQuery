@@ -1,7 +1,5 @@
 name: Release
-on:
-  release:
-    types: [published]
+on: [release, workflow_dispatch]
 
 jobs:
   pypi:
