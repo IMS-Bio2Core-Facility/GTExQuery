@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 """Tests for the multithreading.biomart submodule."""
+import requests
 
-from pathlib import Path
-
-import pytest
-
-from gtexquery.multithreading.biomart import concurrent_biomart
-
-from ..custom_tmp_file import CustomTempFile
+from gtexquery.multithreading.biomart import _get_session, thread_local
 
 
-def test_raises_index_error(tmpdir: Path) -> None:
-    """It raises an IndexError when there are no transcripts."""
-    with pytest.raises(IndexError), CustomTempFile("transcriptId") as file:
-        concurrent_biomart(file.filename, str(tmpdir))
+def test_has_attr() -> None:
+    """It gives thread local a sesson attribute."""
+    _ = _get_session()
+    assert hasattr(thread_local, "session"), "There is no session attribute."
+
+
+def test_has_session() -> None:
+    """It returns a session."""
+    s = _get_session()
+    assert isinstance(s, requests.Session), "It does not return a session."
