@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.0 (2021-07-20)
+### Feature
+* **biomart:** Change input to filename ([`25021bb`](https://github.com/IMS-Bio2Core-Facility/GTExQuery/commit/25021bbac23df42aefebd197f5cfd0e5dadebbef))
+
+### Breaking
+* gtexquery.data_handling.biomart.biomart_request now requires its first parameter to be a string.  ([`25021bb`](https://github.com/IMS-Bio2Core-Facility/GTExQuery/commit/25021bbac23df42aefebd197f5cfd0e5dadebbef))
+
 ## v1.0.1 (2021-07-20)
 ### Documentation
 * **sphinx:** Udate to include new module ([`602e65a`](https://github.com/IMS-Bio2Core-Facility/GTExQuery/commit/602e65ab89b65f95260f42dc034e5f17c8810188))
