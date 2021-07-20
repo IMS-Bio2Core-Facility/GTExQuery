@@ -59,6 +59,9 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: [lint, test, security]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -71,9 +74,10 @@ jobs:
       - name: Get Dependencies
         run: |
           pip install poetry python-semantic-release
+      - name: Configure git
+        run: |
+          git config --global user.name 'rbpatt2019'
+          git config --global user.email 'rbpatt2019@users.noreply.github.com'
       - name: Python Semantic Release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: |
           semantic-release -v DEBUG publish
