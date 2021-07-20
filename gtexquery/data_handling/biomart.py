@@ -35,7 +35,7 @@ XML_QUERY: Callable[[list[str]], str] = lambda transcripts: (
 )
 
 
-def biomart_request(transcripts: list[str], output: str) -> None:
+def biomart_request(infile: str, output: str) -> None:
     """Query Biomart with a list of transcripts.
 
     Instantiates a thread_local `request.Session` before querying Biomart
@@ -44,8 +44,10 @@ def biomart_request(transcripts: list[str], output: str) -> None:
 
     Parameters
     ----------
-    transcripts : list[str]
-        A list of *version-less* Ensembl transcript IDs
+    infile : str
+        The input file.
+        This is expected to be the output of the GTEx query, and will fail if
+        the expected columns are not present.
     output : str
         Where to save results
 
@@ -54,6 +56,8 @@ def biomart_request(transcripts: list[str], output: str) -> None:
     requests.HTTPError
         When the GET request fails
     """
+    transcripts = pd.read_csv(infile)["transcriptId"].tolist()
+
     s = _get_session()
     response = s.get(
         "http://www.ensembl.org/biomart/martservice?query=" + XML_QUERY(transcripts)
