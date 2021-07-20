@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.1 (2021-07-20)
+### Documentation
+* **sphinx:** Udate to include new module ([`602e65a`](https://github.com/IMS-Bio2Core-Facility/GTExQuery/commit/602e65ab89b65f95260f42dc034e5f17c8810188))
+
 ## v1.0.0 (2021-07-14)
 ### Feature
 * **data_handling:** Change process output to csv ([`98f6225`](https://github.com/IMS-Bio2Core-Facility/GTExQuery/commit/98f622531a2ef9597cff58de56ef840a6cb6a603))
