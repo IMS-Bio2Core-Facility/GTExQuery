@@ -11,8 +11,10 @@ as well as several variables representing longer file contents needed in some te
 
 Attributes
 ----------
+BIOMART_RESPONSE : str
+    Example response from a BioMart query, pre-processing.
 BIOMART_CONTENTS : str
-    Example response from a BioMart query.
+    Example response from a BioMart query, post-processing.
 GTEX_CONTENTS : str
     Example response from a GTEx query.
 MANE_CONTENTS : str
@@ -25,6 +27,17 @@ import os
 from tempfile import NamedTemporaryFile
 from types import TracebackType
 from typing import Optional, Type
+
+BIOMART_RESPONSE = """
+HGNC symbol\tGene stable ID\tTranscript stable ID\tRefSeq mRNA ID
+DLX1\tENSG00000144355\tENST00000341900\tNM_001038493
+DLX1\tENSG00000144355\tENST00000361725\tNM_178120
+DLX1\tENSG00000144355\tENST00000409492\t
+DLX1\tENSG00000144355\tENST00000475989\t
+DLX1\tENSG00000144355\tENST00000550686\t
+DLX1\tENSG00000144355\tENST00000361609\t
+"""
+
 
 BIOMART_CONTENTS = """
 geneSymbol,gencodeId,transcriptId,refseq
@@ -46,10 +59,12 @@ ENSG00000144355,DLX1,Brain_Hypothalamus,ENST00000550686,0.4699999988079071,read 
 ENSG00000144355,DLX1,Brain_Hypothalamus,ENST00000361609,0.2399999946355819,read count,gtex_v8
 """
 
-MANE_CONTENTS = """
-#NCBI_GeneID,gencodeId,HGNC_ID,geneSymbol,name,refseq,RefSeq_prot,transcriptId,Ensembl_prot,MANE_status,GRCh38_chr,chr_start,chr_end,chr_strand
-GeneID:1745,ENSG00000144355,HGNC:2914,DLX1,distal-less homeobox 1,NM_178120,NP_835221.2,ENST00000361725,ENSP00000354478.4,MANE Select,2,172085507,172089674,+
-"""
+MANE_CONTENTS = (
+    "#NCBI_GeneID,gencodeId,HGNC_ID,geneSymbol,name,refseq,RefSeq_prot,transcriptId,"
+    "Ensembl_prot,MANE_status,GRCh38_chr,chr_start,chr_end,chr_strand\n"
+    "GeneID:1745,ENSG00000144355,HGNC:2914,DLX1,distal-less homeobox 1,NM_178120,"
+    "NP_835221.2,ENST00000361725,ENSP00000354478.4,MANE Select,2,172085507,172089674,+"
+)
 
 
 class CustomTempFile:
