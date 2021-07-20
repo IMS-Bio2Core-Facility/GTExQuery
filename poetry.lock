@@ -1116,6 +1116,22 @@ redis = ["redis (>=3.0,<4.0)"]
 docs = ["m2r2 (>=0.2,<0.3)", "Sphinx (==4.0.2)", "sphinx-autodoc-typehints (>=1.11,<2.0)", "sphinx-copybutton (>=0.3,<0.4)", "sphinx-rtd-theme (==0.5.2)", "sphinxcontrib-apidoc (>=0.3,<0.4)"]
 
 [[package]]
+name = "requests-mock"
+version = "1.9.3"
+description = "Mock out responses from the requests package"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+requests = ">=2.3,<3"
+six = "*"
+
+[package.extras]
+fixture = ["fixtures"]
+test = ["fixtures", "mock", "purl", "pytest", "sphinx", "testrepository (>=0.0.18)", "testtools"]
+
+[[package]]
 name = "rich"
 version = "10.5.0"
 description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
@@ -1489,7 +1505,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "52d2277ee024b35b5ac6bb956274c923ab6abdf0e6a5e6fa991b21eef75d756f"
+content-hash = "15f2fcefe3f5c14c8f201c774c7a2f134fffaea4b28cbad4d43319df7720846b"
 
 [metadata.files]
 aiohttp = [
@@ -2301,6 +2317,10 @@ requests = [
 requests-cache = [
     {file = "requests-cache-0.7.0.tar.gz", hash = "sha256:b05e8e518c7e80787f98e422653be10621ba02b94bce96780e129f6034c9b890"},
     {file = "requests_cache-0.7.0-py3-none-any.whl", hash = "sha256:96bbf1338e9a124c01bfdd6498eccbfab174a807b5951266b0e37d0a1b2fefca"},
+]
+requests-mock = [
+    {file = "requests-mock-1.9.3.tar.gz", hash = "sha256:8d72abe54546c1fc9696fa1516672f1031d72a55a1d66c85184f972a24ba0eba"},
+    {file = "requests_mock-1.9.3-py2.py3-none-any.whl", hash = "sha256:0a2d38a117c08bb78939ec163522976ad59a6b7fdd82b709e23bb98004a44970"},
 ]
 rich = [
     {file = "rich-10.5.0-py3-none-any.whl", hash = "sha256:d36d4dddbb6cb87cdcb2c02f8ffd7836e1b136e3ba45d4b5a4da057f3b5e7798"},
