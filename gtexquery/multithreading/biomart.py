@@ -17,51 +17,29 @@ particularly if there are many to make.
 As this is a many in, many out process,
 a call to ``concurrency.futures.ThreadPoolExecutor.map`` is sufficient,
 though this call occurs in the analysis script.
-
-To simplify the multi-step process for mapping,
-and allow for multiple transcripts to be queried,
-a ``BMSession`` class is provided.
 """
 import logging
 import threading
 
-import pandas as pd
-
-from ..data_handling.biomart import BMSession
+import requests
 
 thread_local = threading.local()
 logger = logging.getLogger(__name__)
 
 
-def concurrent_biomart(file: str, output: str) -> None:
-    """Given an input file, extract the ENST IDs and query BioMart.
+def _get_session() -> requests.Session:
+    """Instantiate a thread local session.
 
-    Note
-    ----
-    For use with ``concurrency.futures.ThreadPoolExecutor.map``.
+    The requests session is not thread safe,
+    per `this thread <https://github.com/psf/requests/issues/2766>`_.
+    To circumvent this, we create a thread local session. This means each session
+    will still make multiple requests but remain isolated to its calling thread.
 
-    This is designed to allow concurrency within the given pipeline,
-    as reading files and querying an external API are inherently I/O
-    bound processes. Given the nature of this pipeline, the function
-    expects the input file to contain a column `transcriptId` that
-    contains a list of *version-less* ENST IDs from GTEx.
-
-    Parameters
-    ----------
-    file : str
-        Where to read the data from
-    output : str
-        Where to write the results to
-
-    Raises
-    ------
-    IndexError
-        If there are no transcipts to process in ``file``
+    Returns
+    -------
+    requests.Session
     """
-    logger.info(f"Processing file {file}")
-    df = pd.read_csv(file, index_col=None)
-    if len(transcripts := df.loc[:, "transcriptId"].unique().tolist()) == 0:
-        logging.error(f"There are no transcripts for {file}. Raising index error")
-        raise IndexError
-    s = BMSession(transcripts, output)
-    s.biomart_request()
+    # session still worth it - re-used by each thread
+    if not hasattr(thread_local, "session"):
+        thread_local.session = requests.Session()
+    return thread_local.session
