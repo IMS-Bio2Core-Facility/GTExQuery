@@ -142,5 +142,7 @@ def doc_tests(session: Session) -> None:
 def doc_build(session: Session) -> None:
     """Build the documentation."""
     session.run("poetry", "install", "--no-dev", external=True)
-    constrained_install(session, "sphinx", "sphinx-rtd-theme", "myst-parser", "pytest")
+    constrained_install(
+        session, "sphinx", "sphinx-rtd-theme", "myst-parser", "pytest", "requests-mock"
+    )
     session.run("sphinx-build", "docs", "docs/_build")

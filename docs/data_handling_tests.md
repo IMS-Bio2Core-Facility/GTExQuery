@@ -10,6 +10,12 @@ Tests for the data_handling.request Submodule
 .. automodule:: tests.data_handling.test_request
    :members:
 
+Tests for the data_handling.biomart Submodule
+---------------------------------------------
+
+.. automodule:: tests.data_handling.test_biomart
+   :members:
+
 Tests for the data_handling.process Submodule
 ---------------------------------------------
 

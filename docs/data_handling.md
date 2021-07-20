@@ -11,6 +11,13 @@ data_handling.request
    :members:
    :private-members:
 
+data_handling.biomart
+---------------------
+
+.. automodule:: gtexquery.data_handling.biomart
+   :members:
+   :private-members:
+
 data_handling.process
 ---------------------
 
