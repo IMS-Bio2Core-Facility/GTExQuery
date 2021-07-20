@@ -47,7 +47,7 @@ def form(session: Session) -> None:
 @nox.session(python=VERSIONS)
 def lint(session: Session) -> None:
     """Lint files with flake8."""
-    args = session.posargs or LOCATIONS[:2]
+    args = session.posargs or LOCATIONS
     constrained_install(
         session,
         "flake8",
@@ -101,6 +101,7 @@ def tests(session: Session) -> None:
         "pytest-clarity",
         "pytest-sugar",
         "pytest-mock",
+        "requests-mock",
         "pytest-cov",
         "typeguard",  # Though typing, run best in pytest
         "six",
