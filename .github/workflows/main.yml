@@ -57,7 +57,7 @@ jobs:
         run: nox -s security
   release:
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/head/main' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     needs: [lint, test, security]
     steps:
       - name: Checkout
@@ -76,4 +76,4 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: |
-          semantic-release publish --verbosity DEBUG
+          semantic-release -v DEBUG publish
