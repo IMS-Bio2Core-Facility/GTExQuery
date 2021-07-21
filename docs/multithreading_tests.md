@@ -4,9 +4,9 @@ Tests for the multithreading Module
 
 .. automodule:: tests.multithreading
 
-Tests for the multithreading.biomart Submodule
+Tests for the multithreading.request Submodule
 ----------------------------------------------
 
-.. automodule:: tests.multithreading.test_biomart
+.. automodule:: tests.multithreading.test_request
    :members:
 ```
