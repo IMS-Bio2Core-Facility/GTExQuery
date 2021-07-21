@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.0 (2021-07-21)
+### Feature
+* **request:** Do not write file if gene not found ([`1e503ff`](https://github.com/IMS-Bio2Core-Facility/GTExQuery/commit/1e503ffcdf14e5445fffd46ee7a8eba6144e44e5))
+
+### Breaking
+* gtex_request will no longer always output a file. If the passed geneID does not begin with "ENSG", a warning will be logged and the request skipped. This designed to be used with snakemake checkpoints to allow unknown variable number of genes.  ([`1e503ff`](https://github.com/IMS-Bio2Core-Facility/GTExQuery/commit/1e503ffcdf14e5445fffd46ee7a8eba6144e44e5))
+
+### Documentation
+* **multithreading:** Document refactored _get_session function ([`f11db33`](https://github.com/IMS-Bio2Core-Facility/GTExQuery/commit/f11db33c020745a1ea4e9e93069738785cab0c0f))
+
 ## v2.0.0 (2021-07-20)
 ### Feature
 * **biomart:** Change input to filename ([`25021bb`](https://github.com/IMS-Bio2Core-Facility/GTExQuery/commit/25021bbac23df42aefebd197f5cfd0e5dadebbef))
