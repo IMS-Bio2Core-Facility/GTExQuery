@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 """Data handling for *request* step."""
-import contextlib
-import csv
 import logging
 from io import StringIO
-from typing import Optional
 
 import pandas as pd
 import requests
@@ -14,17 +11,13 @@ from ..multithreading.request import _get_session
 logger = logging.getLogger(__name__)
 
 
-def lut_check(gene: str, lut: pd.DataFrame) -> Optional[str]:  # type: ignore
+def lut_check(gene: str, lut: pd.DataFrame) -> str:
     """Check that a gene is found in the Gencode annotations.
 
     If the gene is found, then it is converted to its Ensembl ID.
-    If it is not found, then None is returned to signal to downstream processing
-    that the gene is not in Gencode.
-
-    `contextlib suppress <https://docs.python.org/3/library/contextlib.html>`_
-    is used rather than the more verbose ``try/except``
-    as we are only interested in returning ``none`` for this specific case.
-    Any and all other cases should fail fast and hard.
+    If it is not found, then the gene name is returned.
+    The found status can be queried by seeing if the resulting string starts with
+    "ENSG", a pattern that will only occur for Ensembl IDs.
 
     Note
     ----
@@ -41,7 +34,7 @@ def lut_check(gene: str, lut: pd.DataFrame) -> Optional[str]:  # type: ignore
 
     Returns
     -------
-    Optional[str]
+    str
 
     Example
     -------
@@ -49,17 +42,21 @@ def lut_check(gene: str, lut: pd.DataFrame) -> Optional[str]:  # type: ignore
     >>> lut_check("ASCL1", lut)
     'ENSG00000139352.3'
     >>> lut_check("NotAGene", lut)
+    'NotAGene'
 
     """
-    with contextlib.suppress(IndexError):
-        return lut.loc[lut["name"] == gene, "id"].values[0]
+    try:
+        ensg = lut.loc[lut["name"] == gene, "id"].values[0]
+    except IndexError:
+        ensg = gene
+    return ensg
 
 
 def gtex_request(region: str, gene: str, output: str) -> None:
     """Make a thead-safe gtex request against mediantranscriptexpression.
 
-    If gene is a str, then a query is made to gtex; however, if gene is none, then
-    a blank file is created and no query is performed.
+    If gene starts with "ENSG", a query is made to GTEx. If it does not, no file is
+    created. This is designed to be used with snakemake checkpoints.
 
     A thread local session is provided by a call to ``_get_session``.
     This allows the reuse of sessions, which, among other things,
@@ -80,24 +77,11 @@ def gtex_request(region: str, gene: str, output: str) -> None:
         When the get request returns an error
     """
     # if gene is none, write blank file
-    if gene is None:
-        with open(output, "w") as file:
-            writer = csv.writer(file)
-            writer.writerow(
-                [
-                    "gencodeId",
-                    "geneSymbol",
-                    "tissueSiteDetailId",
-                    "transcriptId",
-                    "median",
-                    "unit",
-                    "datasetId",
-                ]
-            )
-            logger.warning(
-                "A gene was not found in gencode. An empty file has been created."
-            )
-            exit()
+    if not gene.startswith("ENSG"):
+        logger.warning(
+            f"{gene} was not found in Gencode. It will be skipped in further analysis."
+        )
+        exit()
 
     s = _get_session(
         headers={"Accept": "text/html"},
