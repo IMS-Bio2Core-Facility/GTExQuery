@@ -15,7 +15,7 @@ from typing import Callable
 import pandas as pd
 import requests
 
-from ..multithreading.biomart import _get_session
+from ..multithreading.request import _get_session
 
 logger = logging.getLogger(__name__)
 
