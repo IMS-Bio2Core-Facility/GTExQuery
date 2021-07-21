@@ -49,6 +49,17 @@ DLX1,ENSG00000144355,ENST00000550686,
 DLX1,ENSG00000144355,ENST00000361609,
 """
 
+GTEX_RESPONSE = """
+gencodeId\tgeneSymbol\ttissueSiteDetailId\ttranscriptId\tmedian\tunit\tdatasetId
+ENSG00000144355.14\tDLX1\tBrain_Hypothalamus\tENST00000341900.6\t5.184999942779541\tread count\tgtex_v8
+ENSG00000144355.14\tDLX1\tBrain_Hypothalamus\tENST00000361609.4\t0.23999999463558197\tread count\tgtex_v8
+ENSG00000144355.14\tDLX1\tBrain_Hypothalamus\tENST00000361725.4\t3.1599998474121094\tread count\tgtex_v8
+ENSG00000144355.14\tDLX1\tBrain_Hypothalamus\tENST00000409492.1\t1.2300000190734863\tread count\tgtex_v8
+ENSG00000144355.14\tDLX1\tBrain_Hypothalamus\tENST00000469444.6\t0.0\tread count\tgtex_v8
+ENSG00000144355.14\tDLX1\tBrain_Hypothalamus\tENST00000475989.2\t1.225000023841858\tread count\tgtex_v8
+ENSG00000144355.14\tDLX1\tBrain_Hypothalamus\tENST00000550686.1\t0.4699999988079071\tread count\tgtex_v8
+"""
+
 GTEX_CONTENTS = """
 gencodeId,geneSymbol,tissueSiteDetailId,transcriptId,median,unit,datasetId
 ENSG00000144355,DLX1,Brain_Hypothalamus,ENST00000341900,5.184999942779541,read count,gtex_v8
