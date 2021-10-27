@@ -14,7 +14,7 @@ Welcome, friend!
 Open-source software isn't open open-source without the community.
 We appreciate your interest and welcome all contributions.
 While your here,
-we respectfully ask that you abide by our [code of conduct](CODE_OF_CONDUCT.md).
+we respectfully ask that you abide by our [code of conduct](coc.md).
 To help keep everything moving smoothly,
 we have a few guidelines.
 
@@ -120,7 +120,6 @@ Not a necessity,
 but for you terminal warriors out there,
 it just might help!
 
-[conduct]: CODE_OF_CONDUCT.md "Code of conduct"
 [issues]: https://github.com/IMS-Bio2Core-Facility/GTExQuery/issues "Issues"
 [gh]: https://github.com/cli/cli "GH CLI"
 [poetry]: https://python-poetry.org/ "Poetry"

@@ -28,7 +28,7 @@ If you find the project useful,
 leaves us a star on [github][stars]!
 
 If you want to contribute,
-please see the [guide on contributing](./CONTRIBUTING.md)
+please see the [guide on contributing](contributing.md)
 
 ## Motivation
 
